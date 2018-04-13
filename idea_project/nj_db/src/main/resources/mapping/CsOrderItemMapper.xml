@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.za.nj_db.mapper.CsOrderItemMapper">
+    <resultMap id="OrderItemResultMap" type="com.za.nj_db.domain.CsOrderItem">
+        <id column="GUID" property="guid" jdbcType="VARCHAR"/>
+        <result column="ORDER_GUID" property="orderGuid" jdbcType="VARCHAR"/>
+        <result column="ORGAN_CODE" property="organCode" jdbcType="VARCHAR"/>
+        <result column="CONTACT" property="contact" jdbcType="VARCHAR"/>
+        <result column="CONTACT_PHONE" property="contactPhone" jdbcType="VARCHAR"/>
+        <result column="ITEM_GUID" property="itemGuid" jdbcType="VARCHAR"/>
+        <result column="ITEM_TYPE" property="itemType" jdbcType="CHAR"/>
+        <result column="PRICE" property="price" jdbcType="DECIMAL"/>
+        <result column="NUMBER" property="number" jdbcType="INTEGER"/>
+        <result column="AMOUNT" property="amount" jdbcType="DECIMAL"/>
+        <result column="PROVINCE" property="province" jdbcType="VARCHAR"/>
+        <result column="CITY" property="city" jdbcType="VARCHAR"/>
+        <result column="COUNTY" property="county" jdbcType="VARCHAR"/>
+        <result column="PROVINCE_NAME" property="provinceName" jdbcType="VARCHAR"/>
+        <result column="CITY_NAME" property="cityName" jdbcType="VARCHAR"/>
+        <result column="COUNTY_NAME" property="countyName" jdbcType="VARCHAR"/>
+        <result column="ADDRESS" property="address" jdbcType="VARCHAR"/>
+        <result column="SERVICE_FEE" property="serviceFee" jdbcType="DECIMAL"/>
+        <result column="SERVICE_DATE" property="serviceDate" jdbcType="VARCHAR"/>
+        <result column="SERVICE_TIME" property="serviceTime" jdbcType="VARCHAR"/>
+        <result column="ALLOT_TYPE" property="allotType" jdbcType="CHAR"/>
+        <result column="SERVICE_PERSON" property="servicePerson" jdbcType="VARCHAR"/>
+        <result column="REMARK" property="remark" jdbcType="VARCHAR"/>
+        <result column="SEND_TIME" property="sendTime" jdbcType="VARCHAR"/>
+        <result column="START_TIME" property="startTime" jdbcType="VARCHAR"/>
+        <result column="COMPLETE_TIME" property="completeTime" jdbcType="VARCHAR"/>
+        <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="CREATE_USER" property="createUser" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <select id="selectOrderItemInfo" resultMap="OrderItemResultMap" parameterType="com.za.nj_db.domain.YmlInfo">
+        select
+        a.*
+        from cs_order_item a,cs_home_center_bak b where a.ORGAN_CODE = b.COMPANY_CODE
+        <choose>
+            <when test="level!=null and level==1">
+                and b.PROVINCE_CODE=#{code}
+            </when>
+            <when test="level!=null and level==2">
+                and b.CITY_CODE=#{code}
+            </when>
+            <when test="level!=null and level==3">
+                and b.COUNTY_CODE=#{code}
+            </when>
+            <when test="level!=null and level==4">
+                and b.TOWN_CODE=#{code}
+            </when>
+            <when test="level!=null and level==5">
+                and b.VILLAGE_CODE=#{code}
+            </when>
+            <otherwise>
+            </otherwise>
+        </choose>
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from cs_order_item_bak
+    where GUID = #{guid,jdbcType=VARCHAR}
+  </delete>
+
+</mapper>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.za.nj_db.mapper.CsItemConfigMapper">
+    <resultMap id="BaseResultMap" type="com.za.nj_db.domain.CsItemConfig">
+        <id column="GUID" property="guid" jdbcType="VARCHAR"/>
+        <result column="ORGAN_CODE" property="organCode" jdbcType="VARCHAR"/>
+        <result column="TYPE_GUID" property="typeGuid" jdbcType="VARCHAR"/>
+        <result column="ITEM_NAME" property="itemName" jdbcType="VARCHAR"/>
+        <result column="ITEM_PIC" property="itemPic" jdbcType="VARCHAR"/>
+        <result column="ADVANCE_HOURS" property="advanceHours" jdbcType="INTEGER"/>
+        <result column="ITEM_PRICE" property="itemPrice" jdbcType="DECIMAL"/>
+        <result column="VIP_PRICE" property="vipPrice" jdbcType="DECIMAL"/>
+        <result column="ITEM_UNIT" property="itemUnit" jdbcType="VARCHAR"/>
+        <result column="MIN_BUY_NUM" property="minBuyNum" jdbcType="INTEGER"/>
+        <result column="ITEM_TYPE" property="itemType" jdbcType="CHAR"/>
+        <result column="SERVICE_FEE" property="serviceFee" jdbcType="DECIMAL"/>
+        <result column="STATUS" property="status" jdbcType="CHAR"/>
+        <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="CONTENT" property="content" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <select id="selectCsItemConfigInfo" resultMap="BaseResultMap" parameterType="com.za.nj_db.domain.YmlInfo">
+        select
+        a.*
+        from cs_service_item_config_bak a,cs_home_center b where a.ORGAN_CODE = b.COMPANY_CODE
+        <choose>
+            <when test="level!=null and level==1">
+                and b.PROVINCE_CODE=#{code}
+            </when>
+            <when test="level!=null and level==2">
+                and b.CITY_CODE=#{code}
+            </when>
+            <when test="level!=null and level==3">
+                and b.COUNTY_CODE=#{code}
+            </when>
+            <when test="level!=null and level==4">
+                and b.TOWN_CODE=#{code}
+            </when>
+            <when test="level!=null and level==5">
+                and b.VILLAGE_CODE=#{code}
+            </when>
+            <otherwise>
+            </otherwise>
+        </choose>
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from cs_service_item_config_bak
+    where GUID = #{guid,jdbcType=VARCHAR}
+  </delete>
+</mapper>

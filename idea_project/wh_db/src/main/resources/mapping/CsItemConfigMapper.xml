@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.za.wh_db.mapper.CsItemConfigMapper">
+    <resultMap id="BaseResultMap" type="com.za.wh_db.domain.CsItemConfig">
+        <id column="GUID" property="guid" jdbcType="VARCHAR"/>
+        <result column="ORGAN_CODE" property="organCode" jdbcType="VARCHAR"/>
+        <result column="TYPE_GUID" property="typeGuid" jdbcType="VARCHAR"/>
+        <result column="ITEM_NAME" property="itemName" jdbcType="VARCHAR"/>
+        <result column="ITEM_PIC" property="itemPic" jdbcType="VARCHAR"/>
+        <result column="ADVANCE_HOURS" property="advanceHours" jdbcType="INTEGER"/>
+        <result column="ITEM_PRICE" property="itemPrice" jdbcType="DECIMAL"/>
+        <result column="VIP_PRICE" property="vipPrice" jdbcType="DECIMAL"/>
+        <result column="ITEM_UNIT" property="itemUnit" jdbcType="VARCHAR"/>
+        <result column="MIN_BUY_NUM" property="minBuyNum" jdbcType="INTEGER"/>
+        <result column="ITEM_TYPE" property="itemType" jdbcType="CHAR"/>
+        <result column="SERVICE_FEE" property="serviceFee" jdbcType="DECIMAL"/>
+        <result column="STATUS" property="status" jdbcType="CHAR"/>
+        <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="CREATE_USER" property="createUser" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <resultMap id="ResultMapWithBLOBs" type="com.za.wh_db.domain.CsItemConfig" extends="BaseResultMap">
+        <result column="CONTENT" property="content" jdbcType="LONGVARCHAR"/>
+    </resultMap>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from cs_service_item_config
+    where GUID = #{guid,jdbcType=VARCHAR}
+  </delete>
+    <insert id="insert" parameterType="com.za.wh_db.domain.CsItemConfig">
+    insert into cs_service_item_config (GUID, ORGAN_CODE, TYPE_GUID,
+      ITEM_NAME, ITEM_PIC, ADVANCE_HOURS,
+      ITEM_PRICE, VIP_PRICE, ITEM_UNIT,
+      MIN_BUY_NUM, ITEM_TYPE, SERVICE_FEE,
+      STATUS, CREATE_TIME, CREATE_USER,
+      CONTENT)
+    values (#{guid,jdbcType=VARCHAR}, #{organCode,jdbcType=VARCHAR}, #{typeGuid,jdbcType=VARCHAR},
+      #{itemName,jdbcType=VARCHAR}, #{itemPic,jdbcType=VARCHAR}, #{advanceHours,jdbcType=INTEGER},
+      #{itemPrice,jdbcType=DECIMAL}, #{vipPrice,jdbcType=DECIMAL}, #{itemUnit,jdbcType=VARCHAR},
+      #{minBuyNum,jdbcType=INTEGER}, #{itemType,jdbcType=CHAR}, #{serviceFee,jdbcType=DECIMAL},
+      #{status,jdbcType=CHAR}, #{createTime,jdbcType=TIMESTAMP}, #{createUser,jdbcType=VARCHAR},
+      #{content,jdbcType=LONGVARCHAR})
+  </insert>
+</mapper>
