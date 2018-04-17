@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.za.wh_db.mapper.CsCenterMapper">
+    <resultMap id="BaseResultMap" type="com.za.wh_db.domain.CsCenter">
+        <id column="GUID" property="guid" jdbcType="VARCHAR"/>
+        <result column="COMPANY_CODE" property="companyCode" jdbcType="VARCHAR"/>
+        <result column="NAME" property="name" jdbcType="VARCHAR"/>
+        <result column="CONTACT" property="contact" jdbcType="VARCHAR"/>
+        <result column="PHONE" property="phone" jdbcType="VARCHAR"/>
+        <result column="ADDRESS" property="address" jdbcType="VARCHAR"/>
+        <result column="LOGO" property="logo" jdbcType="VARCHAR"/>
+        <result column="LEGAL_PERSON" property="legalPerson" jdbcType="VARCHAR"/>
+        <result column="LEGAL_PHONE" property="legalPhone" jdbcType="VARCHAR"/>
+        <result column="LEGAL_ID_CARD" property="legalIdCard" jdbcType="VARCHAR"/>
+        <result column="BUSINESS_LICENSE" property="businessLicense" jdbcType="VARCHAR"/>
+        <result column="STATUS" property="status" jdbcType="CHAR"/>
+        <result column="PICTURE" property="picture" jdbcType="VARCHAR"/>
+        <result column="OPEN_TIME" property="openTime" jdbcType="VARCHAR"/>
+        <result column="CLOSE_TIME" property="closeTime" jdbcType="VARCHAR"/>
+        <result column="GRADE" property="grade" jdbcType="VARCHAR"/>
+        <result column="PROVINCE_CODE" property="provinceCode" jdbcType="VARCHAR"/>
+        <result column="PROVINCE_NAME" property="provinceName" jdbcType="VARCHAR"/>
+        <result column="CITY_CODE" property="cityCode" jdbcType="VARCHAR"/>
+        <result column="CITY_NAME" property="cityName" jdbcType="VARCHAR"/>
+        <result column="COUNTY_CODE" property="countyCode" jdbcType="VARCHAR"/>
+        <result column="COUNTY_NAME" property="countyName" jdbcType="VARCHAR"/>
+        <result column="TOWN_CODE" property="townCode" jdbcType="VARCHAR"/>
+        <result column="TOWN_NAME" property="townName" jdbcType="VARCHAR"/>
+        <result column="VILLAGE_CODE" property="villageCode" jdbcType="VARCHAR"/>
+        <result column="VILLAGE_NAME" property="villageName" jdbcType="VARCHAR"/>
+        <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="CREATE_USER" property="createUser" jdbcType="VARCHAR"/>
+        <result column="CONTENT" property="content" jdbcType="LONGVARCHAR"/>
+        <result column="NOTICE" property="notice" jdbcType="LONGVARCHAR"/>
+    </resultMap>
+
+    <insert id="insert" parameterType="com.za.wh_db.domain.CsCenter" >
+    insert into cs_home_center (GUID, COMPANY_CODE, NAME,
+      CONTACT, PHONE, ADDRESS,
+      LOGO, LEGAL_PERSON, LEGAL_PHONE,
+      LEGAL_ID_CARD, BUSINESS_LICENSE, STATUS,
+      PICTURE, OPEN_TIME, CLOSE_TIME,
+      GRADE, PROVINCE_CODE, PROVINCE_NAME,
+      CITY_CODE, CITY_NAME, COUNTY_CODE,
+      COUNTY_NAME, TOWN_CODE, TOWN_NAME,
+      VILLAGE_CODE, VILLAGE_NAME, CREATE_TIME,
+      CREATE_USER, CONTENT, NOTICE
+      )
+    values (#{guid,jdbcType=VARCHAR}, #{companyCode,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR},
+      #{contact,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR},
+      #{logo,jdbcType=VARCHAR}, #{legalPerson,jdbcType=VARCHAR}, #{legalPhone,jdbcType=VARCHAR},
+      #{legalIdCard,jdbcType=VARCHAR}, #{businessLicense,jdbcType=VARCHAR}, #{status,jdbcType=CHAR},
+      #{picture,jdbcType=VARCHAR}, #{openTime,jdbcType=VARCHAR}, #{closeTime,jdbcType=VARCHAR},
+      #{grade,jdbcType=VARCHAR}, #{provinceCode,jdbcType=VARCHAR}, #{provinceName,jdbcType=VARCHAR},
+      #{cityCode,jdbcType=VARCHAR}, #{cityName,jdbcType=VARCHAR}, #{countyCode,jdbcType=VARCHAR},
+      #{countyName,jdbcType=VARCHAR}, #{townCode,jdbcType=VARCHAR}, #{townName,jdbcType=VARCHAR},
+      #{villageCode,jdbcType=VARCHAR}, #{villageName,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP},
+      #{createUser,jdbcType=VARCHAR}, #{content,jdbcType=LONGVARCHAR}, #{notice,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from cs_home_center
+    where GUID = #{guid,jdbcType=VARCHAR}
+  </delete>
+
+</mapper>

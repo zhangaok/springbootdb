@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.za.wh_db.mapper.CsOrderItemMapper">
+    <resultMap id="OrderItemResultMap" type="com.za.wh_db.domain.CsOrderItem">
+        <id column="GUID" property="guid" jdbcType="VARCHAR"/>
+        <result column="ORDER_GUID" property="orderGuid" jdbcType="VARCHAR"/>
+        <result column="ORGAN_CODE" property="organCode" jdbcType="VARCHAR"/>
+        <result column="CONTACT" property="contact" jdbcType="VARCHAR"/>
+        <result column="CONTACT_PHONE" property="contactPhone" jdbcType="VARCHAR"/>
+        <result column="ITEM_GUID" property="itemGuid" jdbcType="VARCHAR"/>
+        <result column="ITEM_TYPE" property="itemType" jdbcType="CHAR"/>
+        <result column="PRICE" property="price" jdbcType="DECIMAL"/>
+        <result column="NUMBER" property="number" jdbcType="INTEGER"/>
+        <result column="AMOUNT" property="amount" jdbcType="DECIMAL"/>
+        <result column="PROVINCE" property="province" jdbcType="VARCHAR"/>
+        <result column="CITY" property="city" jdbcType="VARCHAR"/>
+        <result column="COUNTY" property="county" jdbcType="VARCHAR"/>
+        <result column="PROVINCE_NAME" property="provinceName" jdbcType="VARCHAR"/>
+        <result column="CITY_NAME" property="cityName" jdbcType="VARCHAR"/>
+        <result column="COUNTY_NAME" property="countyName" jdbcType="VARCHAR"/>
+        <result column="ADDRESS" property="address" jdbcType="VARCHAR"/>
+        <result column="SERVICE_FEE" property="serviceFee" jdbcType="DECIMAL"/>
+        <result column="SERVICE_DATE" property="serviceDate" jdbcType="VARCHAR"/>
+        <result column="SERVICE_TIME" property="serviceTime" jdbcType="VARCHAR"/>
+        <result column="ALLOT_TYPE" property="allotType" jdbcType="CHAR"/>
+        <result column="SERVICE_PERSON" property="servicePerson" jdbcType="VARCHAR"/>
+        <result column="REMARK" property="remark" jdbcType="VARCHAR"/>
+        <result column="SEND_TIME" property="sendTime" jdbcType="VARCHAR"/>
+        <result column="START_TIME" property="startTime" jdbcType="VARCHAR"/>
+        <result column="COMPLETE_TIME" property="completeTime" jdbcType="VARCHAR"/>
+        <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="CREATE_USER" property="createUser" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    a.GUID, a.ORDER_GUID, a.ORGAN_CODE, a.CONTACT, a.CONTACT_PHONE, a.ITEM_GUID, a.ITEM_TYPE, PRICE,
+    a.NUMBER, a.AMOUNT, a.PROVINCE, a.CITY, a.COUNTY, a.PROVINCE_NAME, a.CITY_NAME, a.COUNTY_NAME, a.ADDRESS,
+    a.SERVICE_FEE, a.SERVICE_DATE, a.SERVICE_TIME, a.ALLOT_TYPE, a.SERVICE_PERSON, a.REMARK, a.SEND_TIME,
+    a.START_TIME, a.COMPLETE_TIME, a.CREATE_TIME, a.CREATE_USER
+  </sql>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from cs_order_item
+    where GUID = #{guid,jdbcType=VARCHAR}
+  </delete>
+    <insert id="insert" parameterType="com.za.wh_db.domain.CsOrderItem">
+    insert into cs_order_item (GUID, ORDER_GUID, ORGAN_CODE,
+      CONTACT, CONTACT_PHONE, ITEM_GUID,
+      ITEM_TYPE, PRICE, NUMBER,
+      AMOUNT, PROVINCE, CITY,
+      COUNTY, PROVINCE_NAME, CITY_NAME,
+      COUNTY_NAME, ADDRESS, SERVICE_FEE,
+      SERVICE_DATE, SERVICE_TIME, ALLOT_TYPE,
+      SERVICE_PERSON, REMARK, SEND_TIME,
+      START_TIME, COMPLETE_TIME, CREATE_TIME,
+      CREATE_USER)
+    values (#{guid,jdbcType=VARCHAR}, #{orderGuid,jdbcType=VARCHAR}, #{organCode,jdbcType=VARCHAR},
+      #{contact,jdbcType=VARCHAR}, #{contactPhone,jdbcType=VARCHAR}, #{itemGuid,jdbcType=VARCHAR},
+      #{itemType,jdbcType=CHAR}, #{price,jdbcType=DECIMAL}, #{number,jdbcType=INTEGER},
+      #{amount,jdbcType=DECIMAL}, #{province,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR},
+      #{county,jdbcType=VARCHAR}, #{provinceName,jdbcType=VARCHAR}, #{cityName,jdbcType=VARCHAR},
+      #{countyName,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{serviceFee,jdbcType=DECIMAL},
+      #{serviceDate,jdbcType=VARCHAR}, #{serviceTime,jdbcType=VARCHAR}, #{allotType,jdbcType=CHAR},
+      #{servicePerson,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{sendTime,jdbcType=VARCHAR},
+      #{startTime,jdbcType=VARCHAR}, #{completeTime,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP},
+      #{createUser,jdbcType=VARCHAR})
+  </insert>
+</mapper>

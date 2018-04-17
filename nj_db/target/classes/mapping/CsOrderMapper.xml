@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.za.nj_db.mapper.CsOrderMapper">
+
+    <resultMap id="OrderResultMap" type="com.za.nj_db.domain.CsOrder">
+        <id column="GUID" property="guid" jdbcType="VARCHAR"/>
+        <result column="ORGAN_CODE" property="organCode" jdbcType="VARCHAR"/>
+        <result column="ORDER_NO" property="orderNo" jdbcType="VARCHAR"/>
+        <result column="ORDER_OWNER" property="orderOwner" jdbcType="VARCHAR"/>
+        <result column="OWNER_PHONE" property="ownerPhone" jdbcType="VARCHAR"/>
+        <result column="TOTAL_AMOUNT" property="totalAmount" jdbcType="DECIMAL"/>
+        <result column="EXTRA_AMOUNT" property="extraAmount" jdbcType="DECIMAL"/>
+        <result column="SERVICE_FEE" property="serviceFee" jdbcType="DECIMAL"/>
+        <result column="PAY_AMOUNT" property="payAmount" jdbcType="DECIMAL"/>
+        <result column="DISCOUNT_AMOUNT" property="discountAmount" jdbcType="DECIMAL"/>
+        <result column="IS_VIP" property="isVip" jdbcType="CHAR"/>
+        <result column="CARD_NO" property="cardNo" jdbcType="VARCHAR"/>
+        <result column="IS_PAY" property="isPay" jdbcType="CHAR"/>
+        <result column="IS_COMPLETE" property="isComplete" jdbcType="CHAR"/>
+        <result column="IS_VISIT" property="isVisit" jdbcType="CHAR"/>
+        <result column="IS_CANCEL" property="isCancel" jdbcType="CHAR"/>
+        <result column="STATUS" property="status" jdbcType="CHAR"/>
+        <result column="IS_REFUND" property="isRefund" jdbcType="CHAR"/>
+        <result column="IS_EVALUATE" property="isEvaluate" jdbcType="CHAR"/>
+        <result column="USER_GUID" property="userGuid" jdbcType="VARCHAR"/>
+        <result column="SOURCE" property="source" jdbcType="CHAR"/>
+        <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="CREATE_USER" property="createUser" jdbcType="VARCHAR"/>
+        <result column="VISIT_TIME" property="visitTime" jdbcType="VARCHAR"/>
+        <result column="VISIT_RECORD" property="visitRecord" jdbcType="VARCHAR"/>
+        <result column="VISIT_RESULT" property="visitResult" jdbcType="CHAR"/>
+        <result column="VISITOR" property="visitor" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <select id="selectOrderInfo" resultMap="OrderResultMap" parameterType="com.za.nj_db.domain.YmlInfo">
+        select
+        a.*
+        from cs_order_bak a,cs_home_center b where a.ORGAN_CODE = b.COMPANY_CODE
+        <choose>
+            <when test="level!=null and level==1">
+                and b.PROVINCE_CODE=#{code}
+            </when>
+            <when test="level!=null and level==2">
+                and b.CITY_CODE=#{code}
+            </when>
+            <when test="level!=null and level==3">
+                and b.COUNTY_CODE=#{code}
+            </when>
+            <when test="level!=null and level==4">
+                and b.TOWN_CODE=#{code}
+            </when>
+            <when test="level!=null and level==5">
+                and b.VILLAGE_CODE=#{code}
+            </when>
+            <otherwise>
+            </otherwise>
+        </choose>
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from cs_order_bak
+    where GUID = #{guid,jdbcType=VARCHAR}
+  </delete>
+
+</mapper>

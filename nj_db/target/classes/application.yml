@@ -1,0 +1,29 @@
+ymlInfo:
+  code: 3201
+  location: http://192.168.1.8:8081/wh
+  level:
+
+spring:
+  datasource:
+     url: jdbc:mysql://localhost:3306/test
+     username: root
+     password: root
+     driver-class-name: com.mysql.jdbc.Driver
+
+#mybatis
+mybatis:
+  mapper-locations: classpath:mapping/*.xml
+  type-aliases-package: com.za.*.domain
+
+server:
+  port: 8080
+servlet:
+  context-path: wh
+
+logging:
+  file: ./log/njdb_logger.txt
+  level:
+    com.za.nj_db: debug
+  root: info
+
+

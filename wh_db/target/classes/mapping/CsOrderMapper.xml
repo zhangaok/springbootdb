@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.za.wh_db.mapper.CsOrderMapper">
+
+    <resultMap id="OrderResultMap" type="com.za.wh_db.domain.CsOrder">
+        <id column="GUID" property="guid" jdbcType="VARCHAR"/>
+        <result column="ORGAN_CODE" property="organCode" jdbcType="VARCHAR"/>
+        <result column="ORDER_NO" property="orderNo" jdbcType="VARCHAR"/>
+        <result column="ORDER_OWNER" property="orderOwner" jdbcType="VARCHAR"/>
+        <result column="OWNER_PHONE" property="ownerPhone" jdbcType="VARCHAR"/>
+        <result column="TOTAL_AMOUNT" property="totalAmount" jdbcType="DECIMAL"/>
+        <result column="EXTRA_AMOUNT" property="extraAmount" jdbcType="DECIMAL"/>
+        <result column="SERVICE_FEE" property="serviceFee" jdbcType="DECIMAL"/>
+        <result column="PAY_AMOUNT" property="payAmount" jdbcType="DECIMAL"/>
+        <result column="DISCOUNT_AMOUNT" property="discountAmount" jdbcType="DECIMAL"/>
+        <result column="IS_VIP" property="isVip" jdbcType="CHAR"/>
+        <result column="CARD_NO" property="cardNo" jdbcType="VARCHAR"/>
+        <result column="IS_PAY" property="isPay" jdbcType="CHAR"/>
+        <result column="IS_COMPLETE" property="isComplete" jdbcType="CHAR"/>
+        <result column="IS_VISIT" property="isVisit" jdbcType="CHAR"/>
+        <result column="IS_CANCEL" property="isCancel" jdbcType="CHAR"/>
+        <result column="STATUS" property="status" jdbcType="CHAR"/>
+        <result column="IS_REFUND" property="isRefund" jdbcType="CHAR"/>
+        <result column="IS_EVALUATE" property="isEvaluate" jdbcType="CHAR"/>
+        <result column="USER_GUID" property="userGuid" jdbcType="VARCHAR"/>
+        <result column="SOURCE" property="source" jdbcType="CHAR"/>
+        <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="CREATE_USER" property="createUser" jdbcType="VARCHAR"/>
+        <result column="VISIT_TIME" property="visitTime" jdbcType="VARCHAR"/>
+        <result column="VISIT_RECORD" property="visitRecord" jdbcType="VARCHAR"/>
+        <result column="VISIT_RESULT" property="visitResult" jdbcType="CHAR"/>
+        <result column="VISITOR" property="visitor" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+    GUID, ORGAN_CODE, ORDER_NO, ORDER_OWNER, OWNER_PHONE, TOTAL_AMOUNT, EXTRA_AMOUNT,
+    SERVICE_FEE, PAY_AMOUNT, DISCOUNT_AMOUNT, IS_VIP, CARD_NO, IS_PAY, IS_COMPLETE, IS_VISIT,
+    IS_CANCEL, STATUS, IS_REFUND, IS_EVALUATE, USER_GUID, SOURCE, CREATE_TIME, CREATE_USER,
+    VISIT_TIME, VISIT_RECORD, VISIT_RESULT, VISITOR
+  </sql>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from cs_order
+    where GUID = #{guid,jdbcType=VARCHAR}
+  </delete>
+
+    <insert id="insert" parameterType="com.za.wh_db.domain.CsOrderItem">
+    insert into cs_order (GUID, ORGAN_CODE, ORDER_NO,
+      ORDER_OWNER, OWNER_PHONE, TOTAL_AMOUNT,
+      EXTRA_AMOUNT, SERVICE_FEE, PAY_AMOUNT,
+      DISCOUNT_AMOUNT, IS_VIP, CARD_NO,
+      IS_PAY, IS_COMPLETE, IS_VISIT,
+      IS_CANCEL, STATUS, IS_REFUND,
+      IS_EVALUATE, USER_GUID, SOURCE,
+      CREATE_TIME, CREATE_USER, VISIT_TIME,
+      VISIT_RECORD, VISIT_RESULT, VISITOR
+      )
+    values (#{guid,jdbcType=VARCHAR}, #{organCode,jdbcType=VARCHAR}, #{orderNo,jdbcType=VARCHAR},
+      #{orderOwner,jdbcType=VARCHAR}, #{ownerPhone,jdbcType=VARCHAR}, #{totalAmount,jdbcType=DECIMAL},
+      #{extraAmount,jdbcType=DECIMAL}, #{serviceFee,jdbcType=DECIMAL}, #{payAmount,jdbcType=DECIMAL},
+      #{discountAmount,jdbcType=DECIMAL}, #{isVip,jdbcType=CHAR}, #{cardNo,jdbcType=VARCHAR},
+      #{isPay,jdbcType=CHAR}, #{isComplete,jdbcType=CHAR}, #{isVisit,jdbcType=CHAR},
+      #{isCancel,jdbcType=CHAR}, #{status,jdbcType=CHAR}, #{isRefund,jdbcType=CHAR},
+      #{isEvaluate,jdbcType=CHAR}, #{userGuid,jdbcType=VARCHAR}, #{source,jdbcType=CHAR},
+      #{createTime,jdbcType=TIMESTAMP}, #{createUser,jdbcType=VARCHAR}, #{visitTime,jdbcType=VARCHAR},
+      #{visitRecord,jdbcType=VARCHAR}, #{visitResult,jdbcType=CHAR}, #{visitor,jdbcType=VARCHAR}
+      )
+  </insert>
+</mapper>
